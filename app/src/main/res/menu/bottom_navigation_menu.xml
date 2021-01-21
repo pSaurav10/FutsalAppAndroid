@@ -3,17 +3,17 @@
     <item
         android:id="@+id/futsal"
         android:enabled="true"
-        android:icon="@drawable/field"
+        android:icon="@drawable/fieldfill"
         android:title="@string/futsal_label"/>
     <item
         android:id="@+id/community"
         android:enabled="true"
-        android:icon="@drawable/community"
+        android:icon="@drawable/comm"
         android:title="@string/community_label"/>
     <item
         android:id="@+id/booking"
         android:enabled="true"
-        android:icon="@drawable/booking"
+        android:icon="@drawable/bookingfill"
         android:title="@string/booking_label"/>
 
 </menu>
