@@ -2,4 +2,7 @@
     <string name="app_name">FutsalApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="futsal_label">Futsal</string>
+    <string name="community_label">Community</string>
+    <string name="booking_label">Booking</string>
 </resources>

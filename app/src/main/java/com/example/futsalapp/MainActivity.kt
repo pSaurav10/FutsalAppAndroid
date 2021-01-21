@@ -17,16 +17,15 @@ class MainActivity : AppCompatActivity() {
         }
     }
     private fun loadfutsal(){
-       futsallist.add(Futsal("Jadibuti Futsal", "https://i.pinimg.com/564x/f0/ba/81/f0ba812b436a81ccbd00ddc6c97a8a8d.jpg"))
-       futsallist.add(Futsal("Jadibuti Futsal", "https://i.pinimg.com/564x/f0/ba/81/f0ba812b436a81ccbd00ddc6c97a8a8d.jpg"))
-       futsallist.add(Futsal("Jadibuti Futsal", "https://i.pinimg.com/564x/f0/ba/81/f0ba812b436a81ccbd00ddc6c97a8a8d.jpg"))
-       futsallist.add(Futsal("Jadibuti Futsal", "https://i.pinimg.com/564x/f0/ba/81/f0ba812b436a81ccbd00ddc6c97a8a8d.jpg"))
-       futsallist.add(Futsal("Jadibuti Futsal", "https://i.pinimg.com/564x/f0/ba/81/f0ba812b436a81ccbd00ddc6c97a8a8d.jpg"))
-       futsallist.add(Futsal("Jadibuti Futsal", "https://i.pinimg.com/564x/f0/ba/81/f0ba812b436a81ccbd00ddc6c97a8a8d.jpg"))
-       futsallist.add(Futsal("Jadibuti Futsal", "https://i.pinimg.com/564x/f0/ba/81/f0ba812b436a81ccbd00ddc6c97a8a8d.jpg"))
-       futsallist.add(Futsal("Jadibuti Futsal", "https://i.pinimg.com/564x/f0/ba/81/f0ba812b436a81ccbd00ddc6c97a8a8d.jpg"))
-       futsallist.add(Futsal("Jadibuti Futsal", "https://i.pinimg.com/564x/f0/ba/81/f0ba812b436a81ccbd00ddc6c97a8a8d.jpg"))
-       futsallist.add(Futsal("Jadibuti Futsal", "https://i.pinimg.com/564x/f0/ba/81/f0ba812b436a81ccbd00ddc6c97a8a8d.jpg"))
+       futsallist.add(Futsal("Jadibuti Futsal", "https://preview.redd.it/aho7va892mr41.jpg?width=1900&format=pjpg&auto=webp&s=4f3c10b5283bd72b3fa85e61f0c02f8ab536723f"))
+       futsallist.add(Futsal("Jadibuti Futsal", "https://preview.redd.it/aho7va892mr41.jpg?width=1900&format=pjpg&auto=webp&s=4f3c10b5283bd72b3fa85e61f0c02f8ab536723f"))
+       futsallist.add(Futsal("Jadibuti Futsal", "https://preview.redd.it/aho7va892mr41.jpg?width=1900&format=pjpg&auto=webp&s=4f3c10b5283bd72b3fa85e61f0c02f8ab536723f"))
+       futsallist.add(Futsal("Jadibuti Futsal", "https://preview.redd.it/aho7va892mr41.jpg?width=1900&format=pjpg&auto=webp&s=4f3c10b5283bd72b3fa85e61f0c02f8ab536723f"))
+       futsallist.add(Futsal("Jadibuti Futsal", "https://preview.redd.it/aho7va892mr41.jpg?width=1900&format=pjpg&auto=webp&s=4f3c10b5283bd72b3fa85e61f0c02f8ab536723f"))
+       futsallist.add(Futsal("Jadibuti Futsal", "https://preview.redd.it/aho7va892mr41.jpg?width=1900&format=pjpg&auto=webp&s=4f3c10b5283bd72b3fa85e61f0c02f8ab536723f"))
+       futsallist.add(Futsal("Jadibuti Futsal", "https://preview.redd.it/aho7va892mr41.jpg?width=1900&format=pjpg&auto=webp&s=4f3c10b5283bd72b3fa85e61f0c02f8ab536723f"))
+       futsallist.add(Futsal("Jadibuti Futsal", "https://preview.redd.it/aho7va892mr41.jpg?width=1900&format=pjpg&auto=webp&s=4f3c10b5283bd72b3fa85e61f0c02f8ab536723f"))
+
 
     }
     companion object{

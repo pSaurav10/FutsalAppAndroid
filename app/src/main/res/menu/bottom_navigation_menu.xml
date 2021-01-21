@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/futsal"
+        android:enabled="true"
+        android:icon="@drawable/field"
+        android:title="@string/futsal_label"/>
+    <item
+        android:id="@+id/community"
+        android:enabled="true"
+        android:icon="@drawable/community"
+        android:title="@string/community_label"/>
+    <item
+        android:id="@+id/booking"
+        android:enabled="true"
+        android:icon="@drawable/booking"
+        android:title="@string/booking_label"/>
+
+</menu>
