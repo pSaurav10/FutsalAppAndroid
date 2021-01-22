@@ -11,7 +11,7 @@
         android:id="@+id/header_layout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/white"
+        android:backgroundTint="@color/green"
         android:elevation="15dp">
 
     <RelativeLayout
@@ -40,6 +40,7 @@
         android:orientation="vertical">
 
         <RelativeLayout
+            android:id="@+id/rlImg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView

@@ -11,6 +11,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/green"
         android:src="@drawable/futsallogo"
         android:scaleType="center"/>
     <LinearLayout
@@ -21,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Username"
-            android:textSize="15sp"
+            android:textSize="20sp"
             android:id="@+id/etUsername"
             android:layout_margin="20dp" />
 
@@ -29,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Password"
-            android:textSize="15sp"
+            android:textSize="20sp"
             android:id="@+id/etPassword"
             android:inputType="textPassword"
             android:layout_margin="20dp"/>
@@ -40,6 +41,26 @@
             android:id="@+id/btnLogin"
             android:text="login"
             android:background="@drawable/roundbtn"/>
+        <RelativeLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/ahc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="Don't have account?"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sign Up"
+                android:id="@+id/tvSignup"
+                android:textSize="18sp"
+                android:layout_toRightOf="@+id/ahc"
+                />
+
+        </RelativeLayout>
     </LinearLayout>
 
 </LinearLayout>
