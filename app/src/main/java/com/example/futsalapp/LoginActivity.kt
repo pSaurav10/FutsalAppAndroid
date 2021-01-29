@@ -6,6 +6,11 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import com.example.futsalapp.db.UserDB
+import com.example.futsalapp.model.User
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var etUsername: EditText
@@ -28,11 +33,18 @@ class LoginActivity : AppCompatActivity() {
             finish()
         }
         btnLogin.setOnClickListener{
-            if (etUsername.text.toString() == "futsal" && etPassword.text.toString() == "futsal123"){
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
+           login()
         }
+    }
+    private fun login() {
+        val username = etUsername.text.toString()
+        val password = etPassword.text.toString()
+        val user : User? = null
+//        CoroutineScope(Dispatchers.IO).launch {
+//            user = UserDB
+//                .getInstance(this@LoginActivity)
+//                .getUserDao()
+//                .
+//        }
     }
 }
