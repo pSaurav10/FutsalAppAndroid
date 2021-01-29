@@ -25,8 +25,16 @@ class SplashActivity : AppCompatActivity() {
            futsal.visibility = View.GONE
             animationView.visibility = View.VISIBLE
             delay(2000)
-            startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
-            finish()
+            val sharedPref = getSharedPreferences("FutsalPref", MODE_PRIVATE)
+            val isCheck = sharedPref.getBoolean("isChecked", false)
+            if (isCheck) {
+                startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+                finish()
+            }
+            else{
+                startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
+                finish()
+            }
         }
     }
 }

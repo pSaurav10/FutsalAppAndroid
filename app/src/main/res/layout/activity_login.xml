@@ -33,10 +33,19 @@
             android:id="@+id/etPassword"
             android:inputType="textPassword"
             android:layout_margin="20dp"/>
+
+            <CheckBox
+                android:id="@+id/cbLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginLeft="20dp"
+                android:text="Keep me Logged In?"/>
+
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_marginLeft="20dp"
             android:id="@+id/btnLogin"
             android:text="login"
             android:background="@drawable/roundbtn"/>
