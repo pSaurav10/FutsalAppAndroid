@@ -57,7 +57,7 @@ class PermissionActivity : AppCompatActivity() {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     callnextActivity()
                 } else {
-                    Toast.makeText(this, "PERMISSIONS Denied", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Grant Access to use the app", Toast.LENGTH_LONG).show()
                     requestPermission()
                 }
             }

@@ -45,10 +45,6 @@ class LoginActivity : AppCompatActivity() {
     private fun login() {
         val username = etUsername.text.toString()
         val password = etPassword.text.toString()
-        if(cbLogin.isChecked){
-            isCheck = true
-            saveSharedpref(username, password)
-        }
         var user : User? = null
         CoroutineScope(Dispatchers.IO).launch {
             user = UserDB
@@ -62,8 +58,12 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
                 else{
+                if(cbLogin.isChecked){
+                    isCheck = true
+                    saveSharedpref(username, password)
+                }
                     startActivity(Intent(this@LoginActivity,
-                            MainActivity::class.java))
+                            PermissionActivity::class.java))
                 finish()
                 }
         }

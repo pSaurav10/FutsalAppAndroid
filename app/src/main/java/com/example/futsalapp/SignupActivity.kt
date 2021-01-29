@@ -63,6 +63,8 @@ class SignupActivity : AppCompatActivity() {
                 .registerUser(user)
             withContext(Main){
                 Toast.makeText(this@SignupActivity, "User Registered", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this@SignupActivity, LoginActivity::class.java))
+                finish()
             }
         }
     }
