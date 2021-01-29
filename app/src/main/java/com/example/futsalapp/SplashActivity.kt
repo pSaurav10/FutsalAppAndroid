@@ -28,7 +28,7 @@ class SplashActivity : AppCompatActivity() {
             val sharedPref = getSharedPreferences("FutsalPref", MODE_PRIVATE)
             val isCheck = sharedPref.getBoolean("isChecked", false)
             if (isCheck) {
-                startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+                startActivity(Intent(this@SplashActivity, PermissionActivity::class.java))
                 finish()
             }
             else{
