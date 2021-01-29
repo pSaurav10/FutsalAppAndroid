@@ -6,11 +6,14 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import com.example.futsalapp.db.UserDB
 import com.example.futsalapp.model.User
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var etUsername: EditText
@@ -39,12 +42,23 @@ class LoginActivity : AppCompatActivity() {
     private fun login() {
         val username = etUsername.text.toString()
         val password = etPassword.text.toString()
-        val user : User? = null
-//        CoroutineScope(Dispatchers.IO).launch {
-//            user = UserDB
-//                .getInstance(this@LoginActivity)
-//                .getUserDao()
-//                .
-//        }
-    }
+        var user : User? = null
+        CoroutineScope(Dispatchers.IO).launch {
+            user = UserDB
+                .getInstance(this@LoginActivity)
+                .getUserDao()
+                .loginUser(username, password)
+            if(user == null) {
+                withContext(Main) {
+                    Toast.makeText(this@LoginActivity, "Invalid Credentials", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+                else{
+                    startActivity(Intent(this@LoginActivity,
+                    MainActivity::class.java))
+                finish()
+                }
+            }
+        }
 }
