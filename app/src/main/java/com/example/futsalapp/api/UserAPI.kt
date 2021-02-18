@@ -4,6 +4,7 @@ import com.example.futsalapp.model.User
 import com.example.futsalapp.response.LoginSignupResponse
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 
 interface UserAPI {
@@ -12,4 +13,5 @@ interface UserAPI {
     suspend fun registerPlayer(
         @Body user: User
     ): Response<LoginSignupResponse>
+
 }

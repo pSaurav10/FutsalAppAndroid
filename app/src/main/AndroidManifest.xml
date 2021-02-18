@@ -16,7 +16,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.FutsalApp">
+        android:theme="@style/Theme.FutsalApp"
+        android:usesCleartextTraffic="true">
         <activity android:name=".PermissionActivity">
         </activity>
         <activity android:name=".SplashActivity">

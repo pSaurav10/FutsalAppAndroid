@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import com.example.futsalapp.db.UserDB
+//import com.example.futsalapp.db.UserDB
 import com.example.futsalapp.model.User
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -46,27 +46,27 @@ class LoginActivity : AppCompatActivity() {
         val username = etUsername.text.toString()
         val password = etPassword.text.toString()
         var user : User? = null
-        CoroutineScope(Dispatchers.IO).launch {
-            user = UserDB
-                .getInstance(this@LoginActivity)
-                .getUserDao()
-                .loginUser(username, password)
-            if(user == null) {
-                withContext(Main) {
-                    Toast.makeText(this@LoginActivity, "Invalid Credentials", Toast.LENGTH_SHORT)
-                        .show()
-                }
-            }
-                else{
-                if(cbLogin.isChecked){
-                    isCheck = true
-                    saveSharedpref(username, password)
-                }
-                    startActivity(Intent(this@LoginActivity,
-                            PermissionActivity::class.java))
-                finish()
-                }
-        }
+//        CoroutineScope(Dispatchers.IO).launch {
+//            user = UserDB
+//                .getInstance(this@LoginActivity)
+//                .getUserDao()
+//                .loginUser(username, password)
+//            if(user == null) {
+//                withContext(Main) {
+//                    Toast.makeText(this@LoginActivity, "Invalid Credentials", Toast.LENGTH_SHORT)
+//                        .show()
+//                }
+//            }
+//                else{
+//                if(cbLogin.isChecked){
+//                    isCheck = true
+//                    saveSharedpref(username, password)
+//                }
+//                    startActivity(Intent(this@LoginActivity,
+//                            PermissionActivity::class.java))
+//                finish()
+//                }
+//        }
     }
     private fun saveSharedpref(username: String, password: String){
         val sharedPref = getSharedPreferences("FutsalPref", MODE_PRIVATE)
