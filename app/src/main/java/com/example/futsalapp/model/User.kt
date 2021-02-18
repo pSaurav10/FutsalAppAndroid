@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class User(
+    val _id: String? = null,
     var fname: String? = null,
     var lname: String? = null,
     var username: String? = null,
@@ -14,7 +15,5 @@ data class User(
     var address: String? = null,
     var email: String? = null,
     var phone: String? = null,
-) {
-    @PrimaryKey(autoGenerate = true)
-    var userId: Int = 0
-}
+    var image: String? = null
+)
