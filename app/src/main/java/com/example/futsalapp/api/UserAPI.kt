@@ -1,6 +1,6 @@
 package com.example.futsalapp.api
 
-import com.example.futsalapp.model.User
+import com.example.futsalapp.model.Player
 import com.example.futsalapp.response.LoginSignupResponse
 import retrofit2.Response
 import retrofit2.http.Body
@@ -10,17 +10,17 @@ import retrofit2.http.POST
 
 interface UserAPI {
 
-    @POST("/player/register")
+    @POST("player/register")
     suspend fun registerPlayer(
-        @Body user: User
+        @Body player: Player
     ): Response<LoginSignupResponse>
 
     //Login user
     @FormUrlEncoded
-    @POST("auth/login")
-    suspend fun checkUser(
-            @Field("username") username : String,
-            @Field("password") password : String
+    @POST("player/login")
+    suspend fun loginPlayer(
+            @Field("username") username: String,
+            @Field("password") password: String
     ): Response<LoginSignupResponse>
 
 }
