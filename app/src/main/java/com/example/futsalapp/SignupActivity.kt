@@ -65,6 +65,10 @@ class SignupActivity : AppCompatActivity() {
                if (response.success == true){
                    withContext(Main){
                        Toast.makeText(this@SignupActivity, "Register Successfully", Toast.LENGTH_SHORT).show()
+                       startActivity(
+                               Intent(this@SignupActivity, LoginActivity::class.java)
+                       )
+                               finish()
                    }
                }
            }

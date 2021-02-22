@@ -18,7 +18,7 @@ class UserRepository: MyApiRequest() {
     }
 
     //login user
-    suspend fun userLogin(username:String, password:String): LoginSignupResponse {
+    suspend fun userLogin(username:String, password:String):LoginSignupResponse {
         return apiRequest {
             userAPI.loginPlayer(username, password)
         }
