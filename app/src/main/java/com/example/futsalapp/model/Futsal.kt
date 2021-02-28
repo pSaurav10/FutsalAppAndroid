@@ -1,36 +1,16 @@
 package com.example.futsalapp.model
 
-import android.os.Parcel
-import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import org.json.JSONArray
+import org.json.JSONObject
+import retrofit2.http.Field
 
 data class Futsal (
-    val name: String? = null,
-    val image: String? = null
-): Parcelable {
-    constructor(parcel: Parcel): this(
-            parcel.readString(),
-            parcel.readString()
-    ){
-
-    }
-
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(name)
-        parcel.writeString(image)
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<Futsal> {
-        override fun createFromParcel(parcel: Parcel): Futsal {
-            return Futsal(parcel)
-        }
-
-        override fun newArray(size: Int): Array<Futsal?> {
-            return arrayOfNulls(size)
-        }
-    }
-
-}
+        var _id: String,
+        var name: String? = null,
+        var address: String? = null,
+        var phoneNumber: String? = null,
+        var description: String? = null,
+        var image: String? = null,
+)
