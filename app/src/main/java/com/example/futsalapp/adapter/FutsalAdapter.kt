@@ -9,11 +9,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.futsalapp.R
+import com.example.futsalapp.entity.FutsalItem
 import com.example.futsalapp.model.Futsal
 
 class FutsalAdapter(
         val context: Context,
-        val futsallist: ArrayList<Futsal>
+        val futsallist: List<FutsalItem>
 ): RecyclerView.Adapter<FutsalAdapter.FutsalViewHolder> ()
 {
     class FutsalViewHolder(view: View):
