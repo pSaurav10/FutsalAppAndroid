@@ -9,6 +9,8 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-feature android:name="android.hardware.camera"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -18,11 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FutsalApp"
         android:usesCleartextTraffic="true">
-        <activity android:name=".PermissionActivity">
-        </activity>
-        <activity android:name=".SplashActivity">
-
-        </activity>
+        <activity android:name=".InsertFutsalActivity" />
+        <activity android:name=".PermissionActivity" />
+        <activity android:name=".SplashActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,9 +31,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".SignupActivity" />
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

@@ -9,8 +9,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.futsalapp.R
+import com.example.futsalapp.api.ServiceBuilder
 import com.example.futsalapp.entity.FutsalItem
 import com.example.futsalapp.model.Futsal
+import kotlin.math.log
 
 class FutsalAdapter(
         val context: Context,
@@ -36,8 +38,11 @@ class FutsalAdapter(
         val futsal = futsallist[position]
         holder.tvTitle.text = futsal.name
 
+        val imagePath = ServiceBuilder.loadImagePath() + futsal.image
+        println("image $imagePath")
         Glide.with(context)
-                .load(futsal.image)
+                .load(imagePath)
+                .fitCenter()
                 .into(holder.ivImage)
     }
 
