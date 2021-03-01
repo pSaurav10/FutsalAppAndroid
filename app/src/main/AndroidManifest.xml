@@ -22,14 +22,15 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".InsertFutsalActivity" />
         <activity android:name=".PermissionActivity" />
-        <activity android:name=".SplashActivity" />
-        <activity android:name=".LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".SplashActivity" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
         </activity>
+        <activity android:name=".LoginActivity"/>
+
         <activity android:name=".SignupActivity" />
         <activity android:name=".MainActivity" />
     </application>

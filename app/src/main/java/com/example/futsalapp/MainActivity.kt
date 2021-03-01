@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }catch (e:Exception){
                 withContext(Dispatchers.Main){
-                    Toast.makeText(this@MainActivity, "Error: ${e.toString()}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MainActivity, "No Internet Connection", Toast.LENGTH_SHORT).show()
                 }
             }
         }

@@ -51,6 +51,10 @@ class LoginActivity : AppCompatActivity() {
     private fun login() {
         val username = etUsername.text.toString()
         val password = etPassword.text.toString()
+        if(cbLogin.isChecked){
+            isCheck = true
+            saveSharedpref(username, password)
+        }
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val repository = UserRepository()
@@ -85,5 +89,14 @@ class LoginActivity : AppCompatActivity() {
             }
 
         }
+    }
+
+    private fun saveSharedpref(username: String, password: String){
+        val sharedPref = getSharedPreferences("FutsalPref", MODE_PRIVATE)
+        val editor = sharedPref.edit()
+        editor.putString("username", username)
+        editor.putString("password", password)
+        editor.putBoolean("isChecked", isCheck);
+        editor.apply()
     }
 }
