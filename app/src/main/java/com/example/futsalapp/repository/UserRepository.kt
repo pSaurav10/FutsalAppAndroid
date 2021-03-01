@@ -4,6 +4,7 @@ import com.example.futsalapp.api.MyApiRequest
 import com.example.futsalapp.api.ServiceBuilder
 import com.example.futsalapp.api.UserAPI
 import com.example.futsalapp.model.Player
+import com.example.futsalapp.response.AllFutsalResponse
 import com.example.futsalapp.response.LoginSignupResponse
 
 class UserRepository: MyApiRequest() {
@@ -23,4 +24,5 @@ class UserRepository: MyApiRequest() {
             userAPI.loginPlayer(username, password)
         }
     }
+
 }
