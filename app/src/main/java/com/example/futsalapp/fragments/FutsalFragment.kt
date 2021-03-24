@@ -12,7 +12,7 @@ import com.example.futsalapp.MainActivity
 import com.example.futsalapp.R
 import com.example.futsalapp.adapter.FutsalAdapter
 import com.example.futsalapp.db.FutsalDB
-import com.example.futsalapp.entity.FutsalItem
+import com.example.futsalapp.repository.FutsalRepository
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.Main
 
@@ -32,7 +32,8 @@ class FutsalFragment : Fragment() {
        val view = inflater.inflate(R.layout.fragment_futsal, container, false)
        recView = view.findViewById(R.id.recView)
         CoroutineScope(Dispatchers.IO).launch {
-            val futsallist = FutsalDB.getInstance(context!!).getFutsalDao().getallFutsal()
+            val futsalrepo = FutsalRepository()
+            val futsallist = futsalrepo.getAllFutsal(context!!)
             withContext(Main) {
                 val futsalAdapter = FutsalAdapter(activity as Context, futsallist)
                 recView.adapter = futsalAdapter

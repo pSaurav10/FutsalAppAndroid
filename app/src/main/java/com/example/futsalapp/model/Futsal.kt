@@ -6,8 +6,10 @@ import org.json.JSONArray
 import org.json.JSONObject
 import retrofit2.http.Field
 
+@Entity
 data class Futsal (
-        var _id: String,
+        @PrimaryKey
+        var _id: String = "",
         var name: String? = null,
         var address: String? = null,
         var phoneNumber: String? = null,

@@ -4,6 +4,5 @@ import com.example.futsalapp.model.Futsal
 
 data class AllFutsalResponse (
         val success: Boolean? = true,
-        val count: Int? = 0,
-        val data: ArrayList<Futsal>? = null
+        val data: MutableList<Futsal>? = null
         )

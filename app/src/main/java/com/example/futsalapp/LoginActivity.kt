@@ -8,6 +8,7 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.example.futsalapp.api.ServiceBuilder
+import com.example.futsalapp.model.Player
 import com.example.futsalapp.repository.UserRepository
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineScope
@@ -24,6 +25,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var tvSignup: TextView
     private lateinit var cbLogin: CheckBox
     private var isCheck = false
+    private  var player: String? = null
     private lateinit var linearlayout: LinearLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,20 +53,22 @@ class LoginActivity : AppCompatActivity() {
     private fun login() {
         val username = etUsername.text.toString()
         val password = etPassword.text.toString()
-        if(cbLogin.isChecked){
-            isCheck = true
-            saveSharedpref(username, password)
-        }
+
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val repository = UserRepository()
                 val response = repository.userLogin(username, password)
                 if (response.success == true){
                     ServiceBuilder.token = "Bearer " + response.token
+                    if(cbLogin.isChecked){
+                        isCheck = true
+                        saveSharedpref(username, password)
+                    }
+//                    player = response.data
                     startActivity(
                         Intent(
                             this@LoginActivity,
-                            MainActivity::class.java
+                            PermissionActivity::class.java
                         )
                     )
                     finish()

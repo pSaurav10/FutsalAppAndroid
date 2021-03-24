@@ -5,10 +5,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.futsalapp.dao.FutsalDAO
-import com.example.futsalapp.entity.FutsalItem
+import com.example.futsalapp.model.Futsal
 
 @Database(
-        entities = [(FutsalItem::class)],
+        entities = [(Futsal::class)],
         version = 1,
         exportSchema=false
 )

@@ -10,13 +10,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.futsalapp.R
 import com.example.futsalapp.api.ServiceBuilder
-import com.example.futsalapp.entity.FutsalItem
 import com.example.futsalapp.model.Futsal
 import kotlin.math.log
 
 class FutsalAdapter(
         val context: Context,
-        val futsallist: List<FutsalItem>
+        val futsallist: MutableList<Futsal>
 ): RecyclerView.Adapter<FutsalAdapter.FutsalViewHolder> ()
 {
     class FutsalViewHolder(view: View):

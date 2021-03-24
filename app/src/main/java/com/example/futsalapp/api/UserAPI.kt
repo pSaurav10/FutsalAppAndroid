@@ -22,7 +22,7 @@ interface UserAPI {
     ): Response<LoginSignupResponse>
 
     @GET("player/fetch")
-    suspend fun getAllPlayer(
+    suspend fun getPlayer(
             @Header("Authorization") token: String,
     ): Response<LoginSignupResponse>
 
