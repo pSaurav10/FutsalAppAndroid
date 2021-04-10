@@ -4,12 +4,15 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class Futsal (
+data class Event (
         @PrimaryKey
         var _id: String = "",
         var name: String? = null,
-        var address: String? = null,
-        var phoneNumber: String? = null,
         var description: String? = null,
         var image: String? = null,
+        var date: String? = null,
+        var fee: String? = null,
+        var phone: String? = null,
+        var location: String? = null,
+        var userId: String? = null
 )
