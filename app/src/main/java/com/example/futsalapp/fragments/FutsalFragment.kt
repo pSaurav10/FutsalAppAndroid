@@ -19,7 +19,7 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.Main
 
 
-class FutsalFragment : Fragment() {
+class FutsalFragment : Fragment(R.layout.fragment_futsal) {
 
     private lateinit var recView: RecyclerView
 
@@ -32,9 +32,9 @@ class FutsalFragment : Fragment() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val futsalrepo = FutsalRepository()
-                val futsallist = futsalrepo.getAllFutsal(context!!)
+                val futsallist = futsalrepo.getAllFutsal(requireContext())
                 withContext(Main) {
-                    val futsalAdapter = FutsalAdapter(context!!, futsallist)
+                    val futsalAdapter = FutsalAdapter(requireContext(), futsallist)
 //                    recView.adapter = futsalAdapter
 //                    recView.layoutManager = GridLayoutManager(activity as Context, 2)
                     val manager = GridLayoutManager(context, 2)
