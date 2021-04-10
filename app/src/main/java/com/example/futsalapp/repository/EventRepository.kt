@@ -12,7 +12,7 @@ class EventRepository() : MyApiRequest() {
     private val eventAPI =
             ServiceBuilder.buildService(EventAPI::class.java)
 
-    suspend fun getAllFutsal(): AllEventResponse {
+    suspend fun getAllEvent(): AllEventResponse {
         return apiRequest {
             eventAPI.getAllEvent(
                     ServiceBuilder.token!!

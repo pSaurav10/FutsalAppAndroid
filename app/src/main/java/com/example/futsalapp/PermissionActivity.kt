@@ -6,6 +6,12 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import com.example.futsalapp.repository.EventRepository
+import com.example.futsalapp.repository.FutsalRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class PermissionActivity : AppCompatActivity() {
@@ -21,12 +27,51 @@ class PermissionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_permission)
-
+        retrieveFutsal()
+        retrieveEvent()
         // Check for permission
         if (!hasPermission()) {
             requestPermission()
         }
     }
+
+    private fun retrieveFutsal() {
+        CoroutineScope(Dispatchers.IO).launch{
+            try {
+                val futsalRepo = FutsalRepository()
+                val response = futsalRepo.getAllFutsal()
+                if (response.success == true){
+                    val futsallist = response.data
+                    futsalRepo.insertFutsal(this@PermissionActivity, futsallist!!)
+
+                }
+            }catch (e:Exception){
+                withContext(Dispatchers.Main){
+                    Toast.makeText(this@PermissionActivity, "No Internet Connection", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun retrieveEvent(){
+        CoroutineScope(Dispatchers.IO).launch{
+            try {
+                val eventRepo = EventRepository()
+                val response = eventRepo.getAllEvent()
+                if (response.success == true){
+                    val eventlist = response.data
+                    eventRepo.insertEvent(this@PermissionActivity, eventlist!!)
+                }
+
+            }
+            catch (e:Exception){
+                withContext(Dispatchers.Main){
+                    Toast.makeText(this@PermissionActivity, "No Internet Connection", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
     private fun requestPermission() {
         ActivityCompat.requestPermissions(
                 this@PermissionActivity,
