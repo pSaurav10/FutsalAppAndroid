@@ -29,29 +29,51 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         bottom_layout = findViewById(R.id.bottom_layout)
+        menuitem()
         retrieveFutsal()
         retrieveEvent()
-        val futsalfragment = FutsalFragment()
-        val postfragment = PostFragment()
-        val eventfragment = EventFragment()
-        setCurrentFragment(eventfragment)
-        bottom_layout.setOnNavigationItemReselectedListener {
-            when (it.itemId){
-                R.id.futsal->setCurrentFragment(futsalfragment)
-                R.id.community->setCurrentFragment(postfragment)
-                R.id.event->setCurrentFragment(eventfragment)
-            }
 
-        }
-
-
-    }
-    private fun setCurrentFragment(fragment: Fragment){
         supportFragmentManager.beginTransaction().apply{
-            replace(R.id.frame, fragment)
+            replace(R.id.frame, FutsalFragment())
             commit()
         }
+
+        }
+
+    private fun menuitem() {
+        bottom_layout.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId){
+                R.id.futsalfrag->{
+                    supportFragmentManager.beginTransaction().apply{
+                        replace(R.id.frame, FutsalFragment())
+                        commit()
+                    }
+                    true
+                }
+                R.id.communityfrag->{
+                    supportFragmentManager.beginTransaction().apply{
+                        replace(R.id.frame, PostFragment())
+                        commit()
+                    }
+                    true
+                }
+                R.id.eventfrag -> {
+                    supportFragmentManager.beginTransaction().apply{
+                        replace(R.id.frame, EventFragment())
+                        commit()
+                    }
+                    true
+                }
+                else -> false
+            }
+
+
+        }
     }
+
+
+
+
 
 
     private fun retrieveFutsal() {
