@@ -47,11 +47,6 @@
         android:orientation="vertical"
         android:layout_above="@+id/bottom_layout">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvResult"
-            android:gravity="center"/>
     </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
