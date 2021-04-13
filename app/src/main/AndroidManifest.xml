@@ -22,7 +22,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FutsalApp"
         android:usesCleartextTraffic="true">
+
         <activity android:name=".FutsaldetailActivity"></activity>
+        <activity android:name=".LoaddataActivity"></activity>
         <activity android:name=".InsertFutsalActivity" />
         <activity android:name=".PermissionActivity" />
         <activity android:name=".SplashActivity">
