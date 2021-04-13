@@ -44,6 +44,7 @@ class FutsaldetailActivity : AppCompatActivity() {
         spinnerTime = findViewById(R.id.spinnerTime)
         etUsername = findViewById(R.id.etUsername)
         etDate = findViewById(R.id.etDate)
+        btnBook = findViewById(R.id.btnBook)
 
         btnBook.setOnClickListener {
             book()
