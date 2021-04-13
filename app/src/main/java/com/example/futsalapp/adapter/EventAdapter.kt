@@ -38,6 +38,8 @@ class EventAdapter(
             .load(imagePath)
             .fitCenter()
             .into(holder.ivImage)
+
+//        Single Events
     }
 
     override fun getItemCount(): Int {
