@@ -6,6 +6,12 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import com.example.futsalapp.repository.EventRepository
+import com.example.futsalapp.repository.FutsalRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class PermissionActivity : AppCompatActivity() {
@@ -27,6 +33,7 @@ class PermissionActivity : AppCompatActivity() {
             requestPermission()
         }
     }
+
     private fun requestPermission() {
         ActivityCompat.requestPermissions(
                 this@PermissionActivity,

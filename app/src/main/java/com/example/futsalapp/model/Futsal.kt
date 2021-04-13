@@ -4,9 +4,6 @@ import android.os.Parcel
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import org.json.JSONArray
-import org.json.JSONObject
-import retrofit2.http.Field
 
 @Entity
 data class Futsal (
