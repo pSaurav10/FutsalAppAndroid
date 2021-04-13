@@ -39,6 +39,7 @@ class PostAdapter (
                 .load(imagePath)
                 .fitCenter()
                 .into(holder.imgProfile)
+//        Single posts
     }
 
     override fun getItemCount(): Int {
