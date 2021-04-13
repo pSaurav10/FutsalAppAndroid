@@ -109,8 +109,10 @@ class FutsaldetailActivity : AppCompatActivity() {
     }
 
     private fun book() {
+        val futsal = intent.getParcelableExtra<Futsal>("futsal")
         val username = etUsername.text.toString()
         val date = etDate.text.toString()
         val time = selectedtime
+        val futsalname = futsal?.name.toString()
     }
 }
