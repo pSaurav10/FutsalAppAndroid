@@ -1,6 +1,7 @@
 package com.example.futsalapp.fragments
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.futsalapp.FutsaldetailActivity
 import com.example.futsalapp.MainActivity
 import com.example.futsalapp.R
 import com.example.futsalapp.adapter.FutsalAdapter
@@ -38,6 +40,9 @@ class FutsalFragment : Fragment() {
                 val futsalAdapter = FutsalAdapter(activity as Context, futsallist)
                 recView.adapter = futsalAdapter
                 recView.layoutManager = GridLayoutManager(activity as Context, 2)
+
+
+
             }
 
         }
