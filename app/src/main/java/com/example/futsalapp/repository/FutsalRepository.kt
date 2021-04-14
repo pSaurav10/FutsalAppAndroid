@@ -24,6 +24,14 @@ class FutsalRepository() : MyApiRequest() {
         }
     }
 
+    suspend fun getAllBooking(): AllBookingResponse {
+        return apiRequest {
+            futsalAPI.getAllBooking(
+                ServiceBuilder.token!!
+            )
+        }
+    }
+
     suspend fun bookFutsal(futsalbook: FutsalBook): AllBookingResponse {
         return apiRequest {
             futsalAPI.futsalBook(futsalbook)

@@ -19,4 +19,9 @@ interface FutsalAPI {
     suspend fun futsalBook(
             @Body futsalbook: FutsalBook
     ): Response<AllBookingResponse>
+
+    @GET("futsalbookget")
+    suspend fun getAllBooking(
+        @Header("Authorization") token: String,
+    ): Response<AllBookingResponse>
 }
