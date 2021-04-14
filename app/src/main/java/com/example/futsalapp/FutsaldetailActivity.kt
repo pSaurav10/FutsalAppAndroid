@@ -1,16 +1,21 @@
 package com.example.futsalapp
 
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.PendingIntent
 import android.content.Intent
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.bumptech.glide.Glide
+import com.esewa.android.sdk.payment.ESewaConfiguration
+import com.esewa.android.sdk.payment.ESewaPayment
+import com.esewa.android.sdk.payment.ESewaPaymentActivity
 import com.example.futsalapp.Notification.NotificationChannels
 import com.example.futsalapp.api.ServiceBuilder
 import com.example.futsalapp.model.Futsal
@@ -24,6 +29,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.*
 
+
 class FutsaldetailActivity : AppCompatActivity() {
 
     private lateinit var name: TextView
@@ -34,13 +40,20 @@ class FutsaldetailActivity : AppCompatActivity() {
     private lateinit var fee: TextView
     private lateinit var futsalimage: ImageView
     private lateinit var spinnerTime: Spinner
-    private lateinit var etUsername: EditText
     private lateinit var etDate: Button
     private lateinit var btnBook: Button
     private lateinit var btnPay: Button
 
+    private val CONFIG_ENVIRONMENT = ESewaConfiguration.ENVIRONMENT_TEST
+    private val REQUEST_CODE_PAYMENT = 1
+    private var eSewaConfiguration: ESewaConfiguration? = null
+
+    private val MERCHANT_ID = "JB0BBQ4aD0UqIThFJwAKBgAXEUkEGQUBBAwdOgABHD4DChwUAB0R"
+    private val MERCHANT_SECRET_KEY = "BhwIWQQADhIYSxILExMcAgFXFhcOBwAKBgAXEQ=="
+
+
     private val time = arrayOf(
-           "Select a time", "06 am", "08 am", "09 am", "3 pm", "5 pm"
+            "Select a time", "06 am", "08 am", "09 am", "3 pm", "5 pm"
     )
 
     private var selectedtime = ""
@@ -56,12 +69,22 @@ class FutsaldetailActivity : AppCompatActivity() {
         fee = findViewById(R.id.fee)
         futsalimage = findViewById(R.id.futsalimage)
         spinnerTime = findViewById(R.id.spinnerTime)
-        etUsername = findViewById(R.id.etUsername)
         etDate = findViewById(R.id.etDate)
         btnBook = findViewById(R.id.btnBook)
+        btnPay = findViewById(R.id.btnPay)
+
+        eSewaConfiguration = ESewaConfiguration()
+                .clientId(MERCHANT_ID)
+                .secretKey(MERCHANT_SECRET_KEY)
+                .environment(CONFIG_ENVIRONMENT)
+
 
         btnBook.setOnClickListener {
             book()
+        }
+
+        btnPay.setOnClickListener {
+            esewapay()
         }
 
 
@@ -84,7 +107,7 @@ class FutsaldetailActivity : AppCompatActivity() {
         }
 
         val timeadapter = ArrayAdapter<String>(this,
-        android.R.layout.simple_list_item_1,time)
+                android.R.layout.simple_list_item_1, time)
 
         spinnerTime.adapter = timeadapter
 
@@ -110,11 +133,11 @@ class FutsaldetailActivity : AppCompatActivity() {
         if (futsal !=null) {
             val imagepath = ServiceBuilder.loadImagePath() + futsal.image
             name.setText(futsal.name.toString())
-            address.setText("Address: "+futsal.address.toString())
-            phone.setText("Phone Number: "+futsal.phoneNumber.toString())
+            address.setText("Address: " + futsal.address.toString())
+            phone.setText("Phone Number: " + futsal.phoneNumber.toString())
             description.setText(futsal.description.toString())
-            grounds.setText("Grounds: "+futsal.grounds.toString())
-            fee.setText("Fee: "+futsal.fee.toString())
+            grounds.setText("Grounds: " + futsal.grounds.toString())
+            fee.setText("Fee: " + futsal.fee.toString())
 
             Glide.with(this)
                     .load(imagepath)
@@ -123,17 +146,42 @@ class FutsaldetailActivity : AppCompatActivity() {
         }
     }
 
+    private fun esewapay() {
+        val eSewaPayment = ESewaPayment("5", "someProductName", "someUniqueId_" + System.nanoTime(), "https://somecallbackurl.com")
+        val intent = Intent(this, ESewaPaymentActivity::class.java)
+        intent.putExtra(ESewaConfiguration.ESEWA_CONFIGURATION, eSewaConfiguration)
+        intent.putExtra(ESewaPayment.ESEWA_PAYMENT, eSewaPayment)
+        startActivityForResult(intent, REQUEST_CODE_PAYMENT)
+
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE_PAYMENT) {
+            if (resultCode == Activity.RESULT_OK) {
+                val s = data!!.getStringExtra(ESewaPayment.EXTRA_RESULT_MESSAGE)
+                Log.i("Proof of Payment", s!!)
+                Toast.makeText(this, "SUCCESSFUL PAYMENT", Toast.LENGTH_SHORT).show()
+            } else if (resultCode == Activity.RESULT_CANCELED) {
+                Toast.makeText(this, "Canceled By User", Toast.LENGTH_SHORT).show()
+            } else if (resultCode == ESewaPayment.RESULT_EXTRAS_INVALID) {
+                val s = data!!.getStringExtra(ESewaPayment.EXTRA_RESULT_MESSAGE)
+                Log.i("Proof of Payment", s!!)
+            }
+        }
+    }
+
+
     private fun book() {
         val futsal = intent.getParcelableExtra<Futsal>("futsal")
-        val userdata = intent.getParcelableExtra< Player>("userdata")
+        val userdata = intent.getParcelableExtra<Player>("userdata")
         val username = userdata?.username.toString()
         val date = etDate.text.toString()
         val time = selectedtime
         val futsalname = futsal?.name.toString()
         val futsalid = futsal?._id.toString()
         val userid = userdata?._id.toString()
-        val futsalbook = FutsalBook(futsalname=futsalname, futsalid=futsalid,
-        date=date, time=time, username=username,userid=userid)
+        val futsalbook = FutsalBook(futsalname = futsalname, futsalid = futsalid,
+                date = date, time = time, username = username, userid = userid)
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val futsalrepo = FutsalRepository()
@@ -141,11 +189,11 @@ class FutsaldetailActivity : AppCompatActivity() {
                 if (response.success == true){
                     withContext(Main){
                         showNotification(time, futsalname, date)
-
+                        btnPay.visibility = View.VISIBLE
                     }
                 }
             }
-            catch (e:Exception){
+            catch (e: Exception){
                 withContext(Main){
                     Toast.makeText(this@FutsaldetailActivity, "$e.toString()", Toast.LENGTH_SHORT).show()
                 }
@@ -156,7 +204,7 @@ class FutsaldetailActivity : AppCompatActivity() {
 
     private fun showNotification(time: String, futsalname: String, date: String) {
         val notificationManager = NotificationManagerCompat.from(this)
-        val activityIntent = Intent(this,FutsaldetailActivity::class.java)
+        val activityIntent = Intent(this, FutsaldetailActivity::class.java)
         val pendingIntent = PendingIntent.getActivity(this, 0, activityIntent, 0)
 
         val notificationChannels = NotificationChannels(this)
