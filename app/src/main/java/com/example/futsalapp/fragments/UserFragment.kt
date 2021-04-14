@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.Glide
@@ -23,6 +24,15 @@ class UserFragment : Fragment() {
     private lateinit var userimage: CircleImageView
     private lateinit var tv_name: TextView
     private lateinit var tv_address: TextView
+    private lateinit var userDetails: RelativeLayout
+    private lateinit var bookingDetails: RelativeLayout
+    private lateinit var userFrame: RelativeLayout
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,6 +43,15 @@ class UserFragment : Fragment() {
         userimage = view.findViewById(R.id.userimage)
         tv_name = view.findViewById(R.id.tv_name)
         tv_address = view.findViewById(R.id.tv_address)
+        userDetails = view.findViewById(R.id.userDetails)
+        bookingDetails = view.findViewById(R.id.bookingDetails)
+        userFrame = view.findViewById(R.id.userFrame)
+
+        childFragmentManager.beginTransaction().apply{
+            replace(R.id.userFrame, UserDetailFragment())
+            addToBackStack(null)
+            commit()
+        }
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -43,7 +62,7 @@ class UserFragment : Fragment() {
                     val userdata = response.data!!
                     val imagepath = ServiceBuilder.loadImagePath() + userdata.imagepp
                     withContext(Dispatchers.Main){
-                        tv_name.text = userdata.fname +" "+ userdata.lname
+                        tv_name.text = userdata.username
                         tv_address.text = userdata.address
                         Glide.with(requireContext())
                             .load(imagepath)
@@ -59,6 +78,21 @@ class UserFragment : Fragment() {
                         "Error: ${e.toString()}", Toast.LENGTH_SHORT
                     ).show()
                 }
+            }
+        }
+
+        userDetails.setOnClickListener {
+            childFragmentManager.beginTransaction().apply{
+                replace(R.id.userFrame, UserDetailFragment())
+                addToBackStack(null)
+                commit()
+            }
+        }
+        bookingDetails.setOnClickListener {
+            childFragmentManager.beginTransaction().apply {
+                replace(R.id.userFrame, BookingsFragment())
+                addToBackStack(null)
+                commit()
             }
         }
 
