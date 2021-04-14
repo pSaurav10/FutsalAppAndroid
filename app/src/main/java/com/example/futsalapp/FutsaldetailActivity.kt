@@ -1,13 +1,27 @@
 package com.example.futsalapp
 
 import android.app.DatePickerDialog
+import android.app.PendingIntent
+import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.bumptech.glide.Glide
+import com.example.futsalapp.Notification.NotificationChannels
 import com.example.futsalapp.api.ServiceBuilder
 import com.example.futsalapp.model.Futsal
+import com.example.futsalapp.model.FutsalBook
+import com.example.futsalapp.model.Player
+import com.example.futsalapp.repository.FutsalRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.*
 
 class FutsaldetailActivity : AppCompatActivity() {
@@ -111,9 +125,50 @@ class FutsaldetailActivity : AppCompatActivity() {
 
     private fun book() {
         val futsal = intent.getParcelableExtra<Futsal>("futsal")
-        val username = etUsername.text.toString()
+        val userdata = intent.getParcelableExtra< Player>("userdata")
+        val username = userdata?.username.toString()
         val date = etDate.text.toString()
         val time = selectedtime
         val futsalname = futsal?.name.toString()
+        val futsalid = futsal?._id.toString()
+        val userid = userdata?._id.toString()
+        val futsalbook = FutsalBook(futsalname=futsalname, futsalid=futsalid,
+        date=date, time=time, username=username,userid=userid)
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val futsalrepo = FutsalRepository()
+                val response = futsalrepo.bookFutsal(futsalbook)
+                if (response.success == true){
+                    withContext(Main){
+                        showNotification(time, futsalname, date)
+
+                    }
+                }
+            }
+            catch (e:Exception){
+                withContext(Main){
+                    Toast.makeText(this@FutsaldetailActivity, "$e.toString()", Toast.LENGTH_SHORT).show()
+                }
+                
+            }
+        }
+    }
+
+    private fun showNotification(time: String, futsalname: String, date: String) {
+        val notificationManager = NotificationManagerCompat.from(this)
+        val activityIntent = Intent(this,FutsaldetailActivity::class.java)
+        val pendingIntent = PendingIntent.getActivity(this, 0, activityIntent, 0)
+
+        val notificationChannels = NotificationChannels(this)
+        notificationChannels.createNotificationChannels()
+
+        val notification = NotificationCompat.Builder(this, notificationChannels.CHANNEL_1)
+                .setSmallIcon(R.drawable.notification)
+                .setContentTitle("Booking successfull")
+                .setContentText("Successfully booked $futsalname for $time at $date")
+                .setColor(Color.GREEN)
+                .setContentIntent(pendingIntent)
+                .build()
+        notificationManager.notify(1, notification)
     }
 }

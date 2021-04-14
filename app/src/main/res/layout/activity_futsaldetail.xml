@@ -91,13 +91,6 @@
         android:layout_gravity="center"
         android:id="@+id/frm"/>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter your Name"
-        android:textSize="20sp"
-        android:id="@+id/etUsername"
-        />
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
