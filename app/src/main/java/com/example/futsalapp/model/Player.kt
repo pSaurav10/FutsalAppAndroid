@@ -10,4 +10,5 @@ data class Player(
         var address: String? = null,
         var phone: String? = null,
         var email: String? = null,
+        var imagepp: String? = null
 )

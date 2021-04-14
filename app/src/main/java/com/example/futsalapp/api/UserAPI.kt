@@ -3,6 +3,7 @@ package com.example.futsalapp.api
 import com.example.futsalapp.model.Player
 import com.example.futsalapp.response.AllFutsalResponse
 import com.example.futsalapp.response.LoginSignupResponse
+import com.example.futsalapp.response.UserResponse
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -21,9 +22,9 @@ interface UserAPI {
             @Field("password") password: String
     ): Response<LoginSignupResponse>
 
-    @GET("player/fetch")
+    @GET("/profile")
     suspend fun getPlayer(
             @Header("Authorization") token: String,
-    ): Response<LoginSignupResponse>
+    ): Response<UserResponse>
 
 }
