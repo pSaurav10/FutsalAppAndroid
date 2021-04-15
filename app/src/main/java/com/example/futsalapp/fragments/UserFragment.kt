@@ -5,56 +5,100 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
+import android.widget.TextView
+import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.example.futsalapp.R
+import com.example.futsalapp.api.ServiceBuilder
+import com.example.futsalapp.repository.UserRepository
+import de.hdodenhof.circleimageview.CircleImageView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [UserFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class UserFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
+    private lateinit var userimage: CircleImageView
+    private lateinit var tv_name: TextView
+    private lateinit var tv_address: TextView
+    private lateinit var userDetails: RelativeLayout
+    private lateinit var bookingDetails: RelativeLayout
+    private lateinit var userFrame: RelativeLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user, container, false)
-    }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment UserFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            UserFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+        val view =  inflater.inflate(R.layout.fragment_user, container, false)
+        userimage = view.findViewById(R.id.userimage)
+        tv_name = view.findViewById(R.id.tv_name)
+        tv_address = view.findViewById(R.id.tv_address)
+        userDetails = view.findViewById(R.id.userDetails)
+        bookingDetails = view.findViewById(R.id.bookingDetails)
+        userFrame = view.findViewById(R.id.userFrame)
+
+        childFragmentManager.beginTransaction().apply{
+            replace(R.id.userFrame, UserDetailFragment())
+            addToBackStack(null)
+            commit()
+        }
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val userrepo = UserRepository()
+                val response = userrepo.getUser()
+                val success = response.success
+                if (success == true){
+                    val userdata = response.data!!
+                    val imagepath = ServiceBuilder.loadImagePath() + userdata.imagepp
+                    withContext(Dispatchers.Main){
+                        tv_name.text = userdata.username
+                        tv_address.text = userdata.address
+                        Glide.with(requireContext())
+                            .load(imagepath)
+                            .fitCenter()
+                            .into(userimage)
+                    }
                 }
             }
+            catch (e: Exception){
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(
+                        context,
+                        "Error: ${e.toString()}", Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
+
+        userDetails.setOnClickListener {
+            childFragmentManager.beginTransaction().apply{
+                replace(R.id.userFrame, UserDetailFragment())
+                addToBackStack(null)
+                commit()
+            }
+        }
+        bookingDetails.setOnClickListener {
+            childFragmentManager.beginTransaction().apply {
+                replace(R.id.userFrame, BookingsFragment())
+                addToBackStack(null)
+                commit()
+            }
+        }
+
+
+        return view
     }
+
+
 }

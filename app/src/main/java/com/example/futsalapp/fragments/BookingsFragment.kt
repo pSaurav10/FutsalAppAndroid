@@ -9,46 +9,50 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.futsalapp.R
-import com.example.futsalapp.adapter.PostAdapter
-import com.example.futsalapp.repository.PostRepository
+import com.example.futsalapp.adapter.BookingAdapter
+import com.example.futsalapp.repository.FutsalRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
-class PostFragment : Fragment() {
+class BookingsFragment : Fragment() {
 
-    private lateinit var recView: RecyclerView
+    private lateinit var recBook: RecyclerView
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_post, container, false)
-        recView = view.findViewById(R.id.recView)
+
+
+        val view = inflater.inflate(R.layout.fragment_bookings, container, false)
+        recBook = view.findViewById(R.id.recBook)
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val postrepo = PostRepository()
-                val response = postrepo.getAllPost()
-                if (response.success==true) {
-                    withContext(Main) {
-                        val postadapter = PostAdapter(requireContext(), response.data!!)
+                val bookrepo = FutsalRepository()
+                val response = bookrepo.getAllBooking()
+                if (response.success == true) {
+                    withContext(Dispatchers.Main) {
+                        val bookadapter = BookingAdapter(requireContext(), response.data!!)
                         val manager = LinearLayoutManager(context)
-                        recView.layoutManager = manager
-                        recView.adapter = postadapter
+                        recBook.layoutManager = manager
+                        recBook.adapter = bookadapter
                     }
                 }
-            }
-            catch(e: Exception){
-                withContext(Main) {
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
                     Toast.makeText(context, "Error : $e", Toast.LENGTH_SHORT).show()
                 }
             }
+
+
         }
         return view
     }
-
 }

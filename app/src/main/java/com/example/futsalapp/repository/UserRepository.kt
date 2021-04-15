@@ -4,10 +4,7 @@ import com.example.futsalapp.api.MyApiRequest
 import com.example.futsalapp.api.ServiceBuilder
 import com.example.futsalapp.api.UserAPI
 import com.example.futsalapp.model.Player
-import com.example.futsalapp.response.AllEventResponse
-import com.example.futsalapp.response.AllFutsalResponse
-import com.example.futsalapp.response.LoginSignupResponse
-import com.example.futsalapp.response.UserResponse
+import com.example.futsalapp.response.*
 
 class UserRepository: MyApiRequest() {
     private val userAPI =
@@ -31,6 +28,14 @@ class UserRepository: MyApiRequest() {
         return apiRequest {
             userAPI.getPlayer(
                     ServiceBuilder.token!!
+            )
+        }
+    }
+
+    suspend fun updateProfile(player: Player): UserUpdateResponse {
+        return apiRequest {
+            userAPI.updateProfile(
+                player, ServiceBuilder.token!!
             )
         }
     }
