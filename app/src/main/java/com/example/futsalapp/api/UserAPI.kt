@@ -4,6 +4,7 @@ import com.example.futsalapp.model.Player
 import com.example.futsalapp.response.AllFutsalResponse
 import com.example.futsalapp.response.LoginSignupResponse
 import com.example.futsalapp.response.UserResponse
+import com.example.futsalapp.response.UserUpdateResponse
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -26,5 +27,11 @@ interface UserAPI {
     suspend fun getPlayer(
             @Header("Authorization") token: String,
     ): Response<UserResponse>
+
+    @PUT("profile/update")
+    suspend fun updateProfile(
+        @Body player: Player,
+        @Header("Authorization") token: String,
+    ): Response<UserUpdateResponse>
 
 }

@@ -14,7 +14,7 @@ data class Player(
         var phone: String? = null,
         var email: String? = null,
         var imagepp: String? = null,
-        var dob: String? = null
+        var age: String? = null
 ): Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readString()!!,

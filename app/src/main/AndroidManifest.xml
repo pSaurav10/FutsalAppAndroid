@@ -22,8 +22,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FutsalApp"
         android:usesCleartextTraffic="true">
-
-        <activity android:name=".FutsaldetailActivity"></activity>
+        <activity android:name=".UserupdateActivity"></activity>
+        <activity android:name=".response.UserupdateActivity" />
+        <activity android:name=".FutsaldetailActivity" />
         <activity android:name=".PermissionActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>
