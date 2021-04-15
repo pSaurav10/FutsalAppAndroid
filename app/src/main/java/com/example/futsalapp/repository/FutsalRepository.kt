@@ -10,6 +10,7 @@ import com.example.futsalapp.model.FutsalBook
 import com.example.futsalapp.model.Player
 import com.example.futsalapp.response.AllBookingResponse
 import com.example.futsalapp.response.AllFutsalResponse
+import com.example.futsalapp.response.DeleteBookingResponse
 import com.example.futsalapp.response.LoginSignupResponse
 
 class FutsalRepository() : MyApiRequest() {
@@ -31,6 +32,13 @@ class FutsalRepository() : MyApiRequest() {
             )
         }
     }
+
+    suspend fun deleteBookings(id: String): DeleteBookingResponse {
+        return apiRequest {
+            futsalAPI.deleteBooking(ServiceBuilder.token!!, id)
+        }
+    }
+
 
     suspend fun bookFutsal(futsalbook: FutsalBook): AllBookingResponse {
         return apiRequest {
