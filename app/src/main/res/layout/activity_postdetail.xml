@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".PostdetailActivity">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:backgroundTint="@color/green"
+        android:elevation="15dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/logo_img"
+                android:layout_width="95dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:src="@drawable/futsallogo"
+                android:layout_marginLeft="15dp" />
+
+
+
+            <ImageView
+                android:id="@+id/menu"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_menu"
+                android:layout_alignParentRight="true" />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+        <RelativeLayout
+            android:id="@+id/post_header_layout"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_below="@+id/header_layout">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/userimg"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/user"
+                android:layout_marginStart="15dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp" />
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/userimg"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:text="Username"
+                android:layout_toRightOf="@+id/userimg"
+                android:layout_marginLeft="25dp" />
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/userimg"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:text="Date"
+                android:layout_below="@+id/username"
+                android:layout_marginLeft="25dp"
+                android:layout_toRightOf="@+id/userimg" />
+
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/post_footer_layout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/post_header_layout">
+
+            <TextView
+                android:id="@+id/post"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="10dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:text="This is post layout"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="10dp" />
+
+
+        </RelativeLayout>
+
+
+
+
+
+        <RelativeLayout
+            android:id="@+id/comments_layout"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/post_footer_layout"
+            android:layout_marginTop="10dp">
+
+
+
+            <EditText
+                android:id="@+id/comment_edt"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:hint="Add a comment..."
+                android:textSize="13sp"
+                android:textColor="@color/black"
+                android:background="@null"/>
+            <Button
+                android:id="@+id/btnComment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/comment_edt"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:text="Comment"
+                android:layout_toRightOf="@+id/comment_edt" />
+
+
+        </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/commentRec"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/comments_layout"/>
+
+
+
+</RelativeLayout>

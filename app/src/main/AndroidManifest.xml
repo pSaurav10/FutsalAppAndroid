@@ -22,7 +22,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FutsalApp"
         android:usesCleartextTraffic="true">
-        <activity android:name=".UserupdateActivity"></activity>
+        <activity android:name=".PostdetailActivity"></activity>
+        <activity android:name=".UserupdateActivity" />
         <activity android:name=".response.UserupdateActivity" />
         <activity android:name=".FutsaldetailActivity" />
         <activity android:name=".PermissionActivity" />
