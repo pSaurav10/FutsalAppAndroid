@@ -1,12 +1,16 @@
 package com.example.futsalapp.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.futsalapp.EventdetailActivity
+import com.example.futsalapp.FutsaldetailActivity
 import com.example.futsalapp.R
 import com.example.futsalapp.api.ServiceBuilder
 import com.example.futsalapp.model.Event
@@ -18,9 +22,11 @@ class EventAdapter(
     class EventViewHolder(view: View): RecyclerView.ViewHolder(view){
         val tvTitle: TextView
         val ivImage: ImageView
+        val cardview: CardView
         init {
             tvTitle = view.findViewById(R.id.tvTitle)
             ivImage = view.findViewById(R.id.ivImage)
+            cardview = view.findViewById(R.id.cardview)
         }
     }
 
@@ -40,6 +46,11 @@ class EventAdapter(
             .into(holder.ivImage)
 
 //        Single Events
+        holder.cardview.setOnClickListener{
+            val intent = Intent (context, EventdetailActivity::class.java)
+                .putExtra("event", event)
+            context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {

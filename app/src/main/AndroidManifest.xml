@@ -22,7 +22,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FutsalApp"
         android:usesCleartextTraffic="true">
-        <activity android:name=".AddpostActivity"></activity>
+        <activity android:name=".EventdetailActivity"></activity>
+        <activity android:name=".AddpostActivity" />
         <activity android:name=".PostdetailActivity" />
         <activity android:name=".UserupdateActivity" />
         <activity android:name=".response.UserupdateActivity" />

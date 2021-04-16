@@ -43,7 +43,7 @@
         <RelativeLayout
             android:id="@+id/post_header_layout"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="70dp"
             android:layout_below="@+id/header_layout">
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -62,7 +62,7 @@
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="10dp"
                 android:textColor="@color/black"
-                android:textSize="12sp"
+                android:textSize="18sp"
                 android:text="Username"
                 android:layout_toRightOf="@+id/userimg"
                 android:layout_marginLeft="25dp" />
@@ -76,7 +76,7 @@
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="5dp"
                 android:textColor="@color/black"
-                android:textSize="12sp"
+                android:textSize="18sp"
                 android:text="Date"
                 android:layout_below="@+id/username"
                 android:layout_marginLeft="25dp"
@@ -101,7 +101,7 @@
                 android:layout_marginStart="25dp"
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 android:text="This is post layout"
                 android:layout_marginLeft="25dp"
@@ -128,10 +128,10 @@
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
                 android:hint="Add a comment..."
-                android:textSize="13sp"
+                android:textSize="15sp"
                 android:textColor="@color/black"
                 android:background="@null"/>
             <Button
@@ -141,7 +141,7 @@
                 android:layout_centerVertical="true"
                 android:layout_toEndOf="@+id/commentadd"
                 android:textColor="@color/black"
-                android:textSize="12sp"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:text="Comment"
                 android:layout_toRightOf="@+id/commentadd" />

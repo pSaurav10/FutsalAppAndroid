@@ -53,7 +53,7 @@ class FutsaldetailActivity : AppCompatActivity() {
 
 
     private val time = arrayOf(
-            "Select a time", "06 am", "08 am", "09 am", "3 pm", "5 pm"
+            "Select time", "06 am", "08 am", "09 am", "3 pm", "5 pm"
     )
 
     private var selectedtime = ""
@@ -189,6 +189,7 @@ class FutsaldetailActivity : AppCompatActivity() {
                 if (response.success == true){
                     withContext(Main){
                         showNotification(time, futsalname, date)
+                        btnBook.visibility = View.GONE
                         btnPay.visibility = View.VISIBLE
                     }
                 }

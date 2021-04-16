@@ -18,7 +18,6 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
         futsal = findViewById(R.id.futsal)
         animationView = findViewById(R.id.animationView)
-        retrieveFutsal()
 
         CoroutineScope(Dispatchers.Main).launch{
           delay(1000)
@@ -34,23 +33,6 @@ class SplashActivity : AppCompatActivity() {
             else{
                 startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
                 finish()
-            }
-        }
-    }
-    private fun retrieveFutsal() {
-        CoroutineScope(Dispatchers.IO).launch{
-            try {
-                val futsalRepo = FutsalRepository()
-                val response = futsalRepo.getAllFutsal()
-                if (response.success == true){
-                    val futsallist = response.data
-                    futsalRepo.insertFutsal(this@SplashActivity, futsallist!!)
-
-                }
-            }catch (e:Exception){
-                withContext(Dispatchers.Main){
-                    Toast.makeText(this@SplashActivity, "No Internet Connection", Toast.LENGTH_SHORT).show()
-                }
             }
         }
     }
