@@ -39,7 +39,6 @@ class MainActivity : AppCompatActivity() {
         retrieveFutsal()
         retrieveEvent()
 
-
         supportFragmentManager.beginTransaction().apply{
             replace(R.id.frame, FutsalFragment())
             commit()

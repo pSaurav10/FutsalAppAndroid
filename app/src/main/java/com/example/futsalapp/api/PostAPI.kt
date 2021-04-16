@@ -1,11 +1,10 @@
 package com.example.futsalapp.api
 
+import com.example.futsalapp.model.Post
 import com.example.futsalapp.response.AllCommentResponse
 import com.example.futsalapp.response.AllPostResponse
 import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface PostAPI {
     @GET("post/fetch")
@@ -18,4 +17,10 @@ interface PostAPI {
             @Header("Authorization") token: String,
             @Path("id") id: String
     ): Response<AllCommentResponse>
+
+    @POST("post/add")
+    suspend fun addPost(
+        @Body post: Post,
+        @Header("Authorization") token: String
+    ): Response<AllPostResponse>
 }

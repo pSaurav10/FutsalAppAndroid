@@ -21,6 +21,15 @@ class PostRepository(): MyApiRequest() {
         }
     }
 
+    suspend fun addPost(post: Post): AllPostResponse {
+        return apiRequest{
+            postAPI.addPost(
+                post,
+                ServiceBuilder.token!!
+            )
+        }
+    }
+
     suspend fun getAllComment(id: String): AllCommentResponse {
         return apiRequest {
             postAPI.getPostComment(
@@ -29,7 +38,4 @@ class PostRepository(): MyApiRequest() {
         }
     }
 
-//    suspend fun insertPost(context: Context, post: List<Post>){
-//        FutsalDB.getInstance(context).getPostDao()
-//    }
 }
