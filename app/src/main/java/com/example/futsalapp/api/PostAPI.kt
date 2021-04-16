@@ -1,5 +1,6 @@
 package com.example.futsalapp.api
 
+import com.example.futsalapp.model.Comment
 import com.example.futsalapp.model.Post
 import com.example.futsalapp.response.AllCommentResponse
 import com.example.futsalapp.response.AllPostResponse
@@ -23,4 +24,10 @@ interface PostAPI {
         @Body post: Post,
         @Header("Authorization") token: String
     ): Response<AllPostResponse>
+
+    @PUT("comment/add")
+    suspend fun addComment(
+        @Body comment: Comment,
+        @Header("Authorization") token: String
+    ): Response<AllCommentResponse>
 }

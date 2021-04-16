@@ -11,5 +11,6 @@ data class Comment (
         var cusername: String? = null,
         var cuserimage: String? = null,
         var ccreatedAt: String? = null,
-        var cuserid: String? = null
+        var cuserid: String? = null,
+        var id: String? = null
 )
