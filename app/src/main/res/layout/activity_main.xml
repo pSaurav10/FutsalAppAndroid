@@ -28,12 +28,12 @@
 
 
             <ImageView
-                android:id="@+id/user_img"
+                android:id="@+id/menu"
                 android:layout_width="100dp"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_menu"
+                android:src="@drawable/ic_info"
                 android:layout_alignParentRight="true" />
 
         </RelativeLayout>

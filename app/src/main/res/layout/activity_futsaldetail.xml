@@ -30,10 +30,10 @@
             <ImageView
                 android:id="@+id/menu"
                 android:layout_width="100dp"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_menu"
+                android:src="@drawable/ic_info"
                 android:layout_alignParentRight="true" />
 
         </RelativeLayout>
@@ -97,6 +97,10 @@
 
 
     </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linlay1">
 
     <RelativeLayout
         android:id="@+id/userFrame"
@@ -278,6 +282,7 @@
             <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+                android:padding="5dp"
             android:orientation="horizontal">
 
                     <Button
@@ -285,6 +290,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Select date"
+                        android:background="@drawable/roundbtn"
                         android:id="@+id/etDate" />
                     <Spinner
                         android:layout_width="match_parent"
@@ -295,12 +301,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
                 android:orientation="horizontal">
 
                         <Button
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Book Futsal"
+                            android:padding="5dp"
+                            android:background="@drawable/roundbtn"
                             android:id="@+id/btnBook"/>
                         <Button
                             android:layout_width="match_parent"
@@ -312,98 +321,7 @@
 
         </LinearLayout>
 
-    </RelativeLayout>
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:orientation="vertical"-->
-<!--        android:layout_below="@+id/header_layout">-->
+    </RelativeLayout></ScrollView>
 
-
-
-
-
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="5dp"-->
-<!--            android:layout_marginLeft="5dp"-->
-<!--            android:textSize="25sp"-->
-<!--            android:textColor="@color/black"-->
-<!--            android:text="Description"-->
-<!--            android:id="@+id/description"/>-->
-
-
-
-<!--    <TextView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="5dp"-->
-<!--        android:layout_marginLeft="5dp"-->
-<!--        android:textSize="25sp"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:text="Phone Number"-->
-<!--        android:id="@+id/phone"/>-->
-<!--    <TextView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="5dp"-->
-<!--        android:layout_marginLeft="5dp"-->
-<!--        android:textSize="25sp"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:text="Address"-->
-<!--        android:id="@+id/address"/>-->
-<!--    <TextView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="5dp"-->
-<!--        android:layout_marginLeft="5dp"-->
-<!--        android:textSize="25sp"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:text="Grounds"-->
-<!--        android:id="@+id/grounds"/>-->
-<!--    <TextView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="5dp"-->
-<!--        android:layout_marginLeft="5dp"-->
-<!--        android:textSize="25sp"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:text="Fee"-->
-<!--        android:id="@+id/fee"/>-->
-
-<!--    <TextView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="5dp"-->
-<!--        android:layout_marginLeft="5dp"-->
-<!--        android:textSize="30sp"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:text="Booking Form"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:id="@+id/frm"/>-->
-
-<!--    <Button-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Select date"-->
-<!--        android:id="@+id/etDate" />-->
-<!--    <Spinner-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:id="@+id/spinnerTime" />-->
-
-<!--        <Button-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Book Futsal"-->
-<!--            android:id="@+id/btnBook"/>-->
-<!--        <Button-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Pay Now"-->
-<!--            android:id="@+id/btnPay"-->
-<!--            android:visibility="gone"/>-->
-<!--    </LinearLayout>-->
 
 </RelativeLayout>

@@ -29,6 +29,7 @@ class PostdetailActivity : AppCompatActivity() {
     private lateinit var commentadd: EditText
     private lateinit var btnComment: Button
     private lateinit var commentRec: RecyclerView
+    private lateinit var menu: ImageView
     private lateinit var id: String
     private var user: Player? = null
 
@@ -42,6 +43,12 @@ class PostdetailActivity : AppCompatActivity() {
         commentadd = findViewById(R.id.commentadd)
         btnComment = findViewById(R.id.btnComment)
         commentRec = findViewById(R.id.commentRec)
+        menu = findViewById(R.id.menu)
+
+        menu.setOnClickListener{
+            val intent = Intent(this@PostdetailActivity, MapsActivity::class.java)
+            startActivity(intent)
+        }
 
         btnComment.setOnClickListener {
             addComment()

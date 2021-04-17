@@ -43,6 +43,7 @@ class FutsaldetailActivity : AppCompatActivity() {
     private lateinit var etDate: Button
     private lateinit var btnBook: Button
     private lateinit var btnPay: Button
+    private lateinit var menu: ImageView
 
     private val CONFIG_ENVIRONMENT = ESewaConfiguration.ENVIRONMENT_TEST
     private val REQUEST_CODE_PAYMENT = 1
@@ -72,6 +73,12 @@ class FutsaldetailActivity : AppCompatActivity() {
         etDate = findViewById(R.id.etDate)
         btnBook = findViewById(R.id.btnBook)
         btnPay = findViewById(R.id.btnPay)
+        menu = findViewById(R.id.menu)
+
+        menu.setOnClickListener{
+            val intent = Intent(this@FutsaldetailActivity, MapsActivity::class.java)
+            startActivity(intent)
+        }
 
         eSewaConfiguration = ESewaConfiguration()
                 .clientId(MERCHANT_ID)

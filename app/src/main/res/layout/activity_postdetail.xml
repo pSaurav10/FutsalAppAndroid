@@ -31,10 +31,10 @@
             <ImageView
                 android:id="@+id/menu"
                 android:layout_width="100dp"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_menu"
+                android:src="@drawable/ic_info"
                 android:layout_alignParentRight="true" />
 
         </RelativeLayout>
@@ -143,6 +143,7 @@
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textStyle="bold"
+                android:background="@drawable/roundbtn"
                 android:text="Comment"
                 android:layout_toRightOf="@+id/commentadd" />
 

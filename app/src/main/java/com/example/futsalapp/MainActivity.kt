@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.ImageView
+import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -29,15 +30,21 @@ class MainActivity : AppCompatActivity() {
 
 
     private lateinit var bottom_layout: BottomNavigationView
-    private lateinit var user_img: ImageView
+    private lateinit var menu: ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        user_img = findViewById(R.id.user_img)
+        menu = findViewById(R.id.menu)
         bottom_layout = findViewById(R.id.bottom_layout)
+
+
+        menu.setOnClickListener{
+            val intent = Intent(this@MainActivity, MapsActivity::class.java)
+            startActivity(intent)
+        }
         menuitem()
-        retrieveFutsal()
-        retrieveEvent()
+//        retrieveFutsal()
+//        retrieveEvent()
 
         supportFragmentManager.beginTransaction().apply{
             replace(R.id.frame, FutsalFragment())
@@ -93,41 +100,41 @@ class MainActivity : AppCompatActivity() {
 
 
 
-    private fun retrieveFutsal() {
-        CoroutineScope(Dispatchers.IO).launch{
-            try {
-                val futsalRepo = FutsalRepository()
-                val response = futsalRepo.getAllFutsal()
-                if (response.success == true){
-                    val futsallist = response.data
-                    futsalRepo.insertFutsal(this@MainActivity, futsallist!!)
-
-                }
-            }catch (e:Exception){
-                withContext(Dispatchers.Main){
-                    Toast.makeText(this@MainActivity, "No Internet Connection", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-    }
-
-    private fun retrieveEvent(){
-        CoroutineScope(Dispatchers.IO).launch{
-            try {
-                val eventRepo = EventRepository()
-                val response = eventRepo.getAllEvent()
-                if (response.success == true){
-                    val eventlist = response.data
-                    eventRepo.insertEvent(this@MainActivity, eventlist!!)
-                }
-
-            }
-            catch (e:Exception){
-                withContext(Dispatchers.Main){
-                    Toast.makeText(this@MainActivity, "No Internet Connection", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-    }
+//    private fun retrieveFutsal() {
+//        CoroutineScope(Dispatchers.IO).launch{
+//            try {
+//                val futsalRepo = FutsalRepository()
+//                val response = futsalRepo.getAllFutsal()
+//                if (response.success == true){
+//                    val futsallist = response.data
+//                    futsalRepo.insertFutsal(this@MainActivity, futsallist!!)
+//
+//                }
+//            }catch (e:Exception){
+//                withContext(Dispatchers.Main){
+//                    Toast.makeText(this@MainActivity, "No Internet Connection", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//        }
+//    }
+//
+//    private fun retrieveEvent(){
+//        CoroutineScope(Dispatchers.IO).launch{
+//            try {
+//                val eventRepo = EventRepository()
+//                val response = eventRepo.getAllEvent()
+//                if (response.success == true){
+//                    val eventlist = response.data
+//                    eventRepo.insertEvent(this@MainActivity, eventlist!!)
+//                }
+//
+//            }
+//            catch (e:Exception){
+//                withContext(Dispatchers.Main){
+//                    Toast.makeText(this@MainActivity, "No Internet Connection", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//        }
+//    }
 
 }
