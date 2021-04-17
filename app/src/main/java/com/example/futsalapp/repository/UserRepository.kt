@@ -5,6 +5,8 @@ import com.example.futsalapp.api.ServiceBuilder
 import com.example.futsalapp.api.UserAPI
 import com.example.futsalapp.model.Player
 import com.example.futsalapp.response.*
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 
 class UserRepository: MyApiRequest() {
     private val userAPI =
@@ -39,5 +41,13 @@ class UserRepository: MyApiRequest() {
             )
         }
     }
+
+    suspend fun uploadImage(id: String, body: MultipartBody.Part): ImageResponse {
+        return apiRequest {
+            userAPI.uploadImage(
+                    ServiceBuilder.token!!, id, body
+            )
+        }
+}
 
 }

@@ -5,16 +5,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
 import com.example.futsalapp.model.Player
-//import com.example.futsalapp.db.UserDB
 import com.example.futsalapp.repository.UserRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.*
 
 class SignupActivity : AppCompatActivity() {
-    private lateinit var rlImg: RelativeLayout
+
     private lateinit var fName: EditText
     private lateinit var lName: EditText
     private lateinit var uName: EditText
@@ -27,7 +27,6 @@ class SignupActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
-        rlImg = findViewById(R.id.rlImg)
         fName = findViewById(R.id.fName)
         lName = findViewById(R.id.lName)
         uName = findViewById(R.id.uName)
@@ -37,6 +36,9 @@ class SignupActivity : AppCompatActivity() {
         btnSignup = findViewById(R.id.btnSignup)
         password = findViewById(R.id.pass)
         tvLogin = findViewById(R.id.tvLogin)
+
+
+
         tvLogin.setOnClickListener{
             loadLogin()
         }
@@ -44,6 +46,7 @@ class SignupActivity : AppCompatActivity() {
             signUp()
         }
     }
+
     fun loadLogin(){
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)

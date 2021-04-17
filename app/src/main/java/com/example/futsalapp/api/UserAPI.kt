@@ -1,10 +1,9 @@
 package com.example.futsalapp.api
 
 import com.example.futsalapp.model.Player
-import com.example.futsalapp.response.AllFutsalResponse
-import com.example.futsalapp.response.LoginSignupResponse
-import com.example.futsalapp.response.UserResponse
-import com.example.futsalapp.response.UserUpdateResponse
+import com.example.futsalapp.response.*
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -12,8 +11,9 @@ interface UserAPI {
 
     @POST("player/register")
     suspend fun registerPlayer(
-        @Body player: Player
+            @Body player: Player
     ): Response<LoginSignupResponse>
+
 
     //Login user
     @FormUrlEncoded
@@ -33,5 +33,13 @@ interface UserAPI {
         @Body player: Player,
         @Header("Authorization") token: String,
     ): Response<UserUpdateResponse>
+
+    @Multipart
+    @PUT("profile/photo/{id}")
+    suspend fun uploadImage(
+        @Header("Authorization") token: String,
+        @Path("id") id: String,
+        @Part file: MultipartBody.Part
+    ): Response<ImageResponse>
 
 }

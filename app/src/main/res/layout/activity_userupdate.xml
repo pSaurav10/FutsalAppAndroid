@@ -8,11 +8,20 @@
         android:layout_marginRight="30dp"
         android:orientation="vertical"
     tools:context=".UserupdateActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="25dp">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/userimg"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"/>
 
+    </LinearLayout>
 <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="15dp">
+    android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -20,19 +29,12 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="First Name"
-                android:textColor="@color/headings"
-                android:textSize="13sp" />
-
             <EditText
                 android:id="@+id/etFirstname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-light"
-                android:hint="First Nname"
+                android:hint="First Name"
                 android:textColor="#000000"
                 android:textSize="18sp" />
 
@@ -48,13 +50,6 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Last Name"
-            android:textColor="@color/headings"
-            android:textSize="13sp" />
 
         <EditText
             android:id="@+id/etLastname"
@@ -77,15 +72,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
         android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Username"
-            android:textColor="@color/headings"
-            android:textSize="13sp" />
 
         <EditText
             android:id="@+id/etUsername"
@@ -106,15 +93,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
             android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Email"
-                android:textColor="@color/headings"
-                android:textSize="13sp" />
 
             <EditText
                 android:id="@+id/etEmail"
@@ -136,15 +115,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
             android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Phone"
-                android:textColor="@color/headings"
-                android:textSize="13sp" />
 
             <EditText
                 android:id="@+id/etPhone"
@@ -166,15 +137,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
         android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Address"
-            android:textColor="@color/headings"
-            android:textSize="13sp" />
 
         <EditText
             android:id="@+id/etAddress"
@@ -196,15 +159,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
             android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Age"
-                android:textColor="@color/headings"
-                android:textSize="13sp" />
 
             <EditText
                 android:id="@+id/etAge"
@@ -225,7 +180,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
             android:orientation="vertical">
 
             <Button
