@@ -1,13 +1,15 @@
 package com.example.futsalapp
 
 import android.content.Intent
+import android.graphics.Color
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.ImageView
-import android.widget.Spinner
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.futsalapp.api.ServiceBuilder
@@ -26,25 +28,35 @@ import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), SensorEventListener {
 
 
     private lateinit var bottom_layout: BottomNavigationView
     private lateinit var menu: ImageView
+    private lateinit var frame: LinearLayout
+    private lateinit var sensorManager: SensorManager
+    private var sensor: Sensor?= null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         menu = findViewById(R.id.menu)
+        frame = findViewById(R.id.frame)
         bottom_layout = findViewById(R.id.bottom_layout)
 
+        sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
+
+        if (!checkSensor())
+            return
+        else {
+            sensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT)
+            sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL)
+        }
 
         menu.setOnClickListener{
             val intent = Intent(this@MainActivity, MapsActivity::class.java)
             startActivity(intent)
         }
         menuitem()
-//        retrieveFutsal()
-//        retrieveEvent()
 
         supportFragmentManager.beginTransaction().apply{
             replace(R.id.frame, FutsalFragment())
@@ -55,7 +67,26 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+    private fun checkSensor(): Boolean {
+        var flag = true
+        if (sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY)==null){
+            flag = false
+        }
+        return flag
+    }
+    override fun onSensorChanged(event: SensorEvent?) {
+        val values = event!!.values[0]
+        if (values<=4)
+        {
+            ServiceBuilder.token = null
+            val intent = Intent(this@MainActivity, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+    }
 
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+    }
 
     private fun menuitem() {
         bottom_layout.setOnNavigationItemSelectedListener { item ->
@@ -96,45 +127,5 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
-
-
-
-//    private fun retrieveFutsal() {
-//        CoroutineScope(Dispatchers.IO).launch{
-//            try {
-//                val futsalRepo = FutsalRepository()
-//                val response = futsalRepo.getAllFutsal()
-//                if (response.success == true){
-//                    val futsallist = response.data
-//                    futsalRepo.insertFutsal(this@MainActivity, futsallist!!)
-//
-//                }
-//            }catch (e:Exception){
-//                withContext(Dispatchers.Main){
-//                    Toast.makeText(this@MainActivity, "No Internet Connection", Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//        }
-//    }
-//
-//    private fun retrieveEvent(){
-//        CoroutineScope(Dispatchers.IO).launch{
-//            try {
-//                val eventRepo = EventRepository()
-//                val response = eventRepo.getAllEvent()
-//                if (response.success == true){
-//                    val eventlist = response.data
-//                    eventRepo.insertEvent(this@MainActivity, eventlist!!)
-//                }
-//
-//            }
-//            catch (e:Exception){
-//                withContext(Dispatchers.Main){
-//                    Toast.makeText(this@MainActivity, "No Internet Connection", Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//        }
-//    }
 
 }
