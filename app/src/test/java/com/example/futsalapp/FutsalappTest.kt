@@ -53,6 +53,8 @@ class FutsalappTest {
 
     }
 
+
+    // -----------------------------postADD Testing-----------------------------
     @Test
     fun postADD() = runBlocking {
         PostRepository = PostRepository()
@@ -67,6 +69,8 @@ class FutsalappTest {
         Assert.assertEquals(expectedResult, actualResult)
     }
 
+
+    // -----------------------------Booking Delete Testing-----------------------------
     @Test
     fun bookingDelete() = runBlocking {
         FutsalRepository = FutsalRepository()

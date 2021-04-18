@@ -1,2 +1,3 @@
+include ':futsalwear'
 include ':app'
 rootProject.name = "FutsalApp"
