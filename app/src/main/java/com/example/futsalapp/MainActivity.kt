@@ -9,6 +9,7 @@ import android.hardware.SensorManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.WindowManager
 import android.widget.*
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
@@ -48,7 +49,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         if (!checkSensor())
             return
         else {
-            sensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT)
+            sensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY)
             sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL)
         }
 
@@ -75,13 +76,13 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         return flag
     }
     override fun onSensorChanged(event: SensorEvent?) {
-        val values = event!!.values[0]
-        if (values<=4)
-        {
-            ServiceBuilder.token = null
-            val intent = Intent(this@MainActivity, LoginActivity::class.java)
-            startActivity(intent)
-            finish()
+        if(event!=null){
+            if(event.sensor.type == Sensor.TYPE_PROXIMITY){
+                val values = event!!.values[0]
+                if(values < 0.01){
+                    this.finishAffinity()
+                }
+            }
         }
     }
 

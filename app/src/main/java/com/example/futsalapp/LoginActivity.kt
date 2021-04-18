@@ -65,26 +65,6 @@ class LoginActivity : AppCompatActivity(), SensorEventListener {
            login()
         }
     }
-    private fun checkSensor(): Boolean {
-        var flag = true
-        if (sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY)==null){
-            flag = false
-        }
-        return flag
-    }
-    override fun onSensorChanged(event: SensorEvent?) {
-        val values = event!!.values[0]
-        if (values>40)
-        {
-            linearlayout.setBackgroundColor(Color.WHITE)
-        }
-        if (values<40){
-            linearlayout.setBackgroundColor(Color.GRAY)
-        }
-    }
-
-    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-    }
 
     private fun login() {
         val username = etUsername.text.toString()
@@ -138,5 +118,25 @@ class LoginActivity : AppCompatActivity(), SensorEventListener {
         editor.putString("password", password)
         editor.putBoolean("isChecked", isCheck);
         editor.apply()
+    }
+    private fun checkSensor(): Boolean {
+        var flag = true
+        if (sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY)==null){
+            flag = false
+        }
+        return flag
+    }
+    override fun onSensorChanged(event: SensorEvent?) {
+        val values = event!!.values[0]
+        if (values>40)
+        {
+            linearlayout.setBackgroundColor(Color.WHITE)
+        }
+        if (values<40){
+            linearlayout.setBackgroundColor(Color.GRAY)
+        }
+    }
+
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
     }
 }

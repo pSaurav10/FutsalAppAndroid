@@ -123,6 +123,8 @@ class UserupdateActivity : AppCompatActivity(), SensorEventListener {
                         withContext(Main){
                             uploadImage(id)
                             showNotification(username)
+                            val intent = Intent(this@UserupdateActivity, MainActivity::class.java)
+                            startActivity(intent)
                         }
                     }
                 }
@@ -165,6 +167,15 @@ class UserupdateActivity : AppCompatActivity(), SensorEventListener {
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
     }
+    override fun onResume() {
+        super.onResume()
+        sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL)
+    }
+
+    override fun onPause() {
+        sensorManager.unregisterListener(this)
+        super.onPause()
+    }
     private fun uploadImage(id: String?) {
         if (imageUrl != null) {
             val file = File(imageUrl!!)
@@ -177,7 +188,6 @@ class UserupdateActivity : AppCompatActivity(), SensorEventListener {
                 try {
                     val userrepo = UserRepository()
                     val response = userrepo.uploadImage(id!!, body)
-                    println("Success of image upload"+response.success)
                     if (response.success == true) {
                         withContext(Main) {
                             Toast.makeText(this@UserupdateActivity, "Uploaded", Toast.LENGTH_SHORT)

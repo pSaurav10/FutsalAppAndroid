@@ -5,10 +5,10 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ServiceBuilder {
-//    private const val BASE_URL =
-//        "http://10.0.2.2:8080"
     private const val BASE_URL =
-        "http://192.168.11.78:8080"
+        "http://10.0.2.2:8080"
+//    private const val BASE_URL =
+//        "http://192.168.1.23:8080"
 //    private const val BASE_URL =
 //            "http://localhost:8080"
     var token: String? = null
