@@ -56,8 +56,7 @@ class AddpostActivity : AppCompatActivity() {
         val post = etPost.text.toString()
         val username = user!!.username
         val userimage = user!!.imagepp
-        val userid = user!!._id
-        val posts = Post(post=post, username=username, userimage = userimage, userId = userid)
+        val posts = Post(post=post, username=username, userimage = userimage)
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val postrepo = PostRepository();
