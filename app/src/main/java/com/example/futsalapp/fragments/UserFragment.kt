@@ -16,9 +16,11 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.example.futsalapp.LoginActivity
 import com.example.futsalapp.R
 import com.example.futsalapp.api.ServiceBuilder
 import com.example.futsalapp.repository.UserRepository
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -39,6 +41,7 @@ class UserFragment : Fragment() {
     private lateinit var userDetails: RelativeLayout
     private lateinit var bookingDetails: RelativeLayout
     private lateinit var userFrame: RelativeLayout
+    private lateinit var logout: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,6 +61,15 @@ class UserFragment : Fragment() {
         userDetails = view.findViewById(R.id.userDetails)
         bookingDetails = view.findViewById(R.id.bookingDetails)
         userFrame = view.findViewById(R.id.userFrame)
+        logout = view.findViewById(R.id.logout)
+
+
+        logout.setOnClickListener {
+            ServiceBuilder.token = null
+            val intent = Intent(context, LoginActivity::class.java)
+            startActivity(intent)
+            activity?.finish()
+        }
 
         childFragmentManager.beginTransaction().apply{
             replace(R.id.userFrame, UserDetailFragment())
