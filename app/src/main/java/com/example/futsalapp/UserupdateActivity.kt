@@ -6,6 +6,10 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
@@ -37,7 +41,7 @@ import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
-class UserupdateActivity : AppCompatActivity() {
+class UserupdateActivity : AppCompatActivity(), SensorEventListener {
 
     private lateinit var etFirstname: EditText
     private lateinit var etLastname: EditText
@@ -48,6 +52,11 @@ class UserupdateActivity : AppCompatActivity() {
     private lateinit var etAge: EditText
     private lateinit var btnUpdate: Button
     private lateinit var userimg: CircleImageView
+    private lateinit var sensorManager: SensorManager
+    private var acceleration = 0f
+    private var currentAcceleration = 0f
+    private var lastAcceleration = 0f
+    private var sensor: Sensor? = null
     private lateinit var id: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +70,18 @@ class UserupdateActivity : AppCompatActivity() {
         etAge = findViewById(R.id.etAge)
         btnUpdate = findViewById(R.id.btnUpdate)
         userimg = findViewById(R.id.userimg)
+        sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
+
+        acceleration = 10f
+        currentAcceleration = SensorManager.GRAVITY_EARTH
+        lastAcceleration = SensorManager.GRAVITY_EARTH
+
+        if (!checkSensor())
+            return
+        else {
+            sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+            sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL)
+        }
 
         userimg.setOnClickListener {
             loadPopUpMenu()
@@ -102,6 +123,8 @@ class UserupdateActivity : AppCompatActivity() {
                         withContext(Main){
                             uploadImage(id)
                             showNotification(username)
+                            val intent = Intent(this@UserupdateActivity, MainActivity::class.java)
+                            startActivity(intent)
                         }
                     }
                 }
@@ -114,6 +137,45 @@ class UserupdateActivity : AppCompatActivity() {
         }
     }
 
+    private fun checkSensor(): Boolean {
+        var flag = true
+        if (sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) == null) {
+            flag = false
+        }
+        return flag
+    }
+
+    override fun onSensorChanged(event: SensorEvent?) {
+        val values = event!!.values
+        val xAxis = values[0]
+        val yAxis = values[1]
+        val zAxis = values[2]
+
+        lastAcceleration = currentAcceleration
+        currentAcceleration =
+            kotlin.math.sqrt((xAxis * xAxis + yAxis * yAxis + zAxis * zAxis).toDouble()).toFloat()
+        val delta: Float = currentAcceleration - lastAcceleration
+        acceleration = acceleration * 0.9f + delta
+        if (acceleration > 12) {
+            finish()
+            startActivity(intent)
+        }
+
+
+
+    }
+
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+    }
+    override fun onResume() {
+        super.onResume()
+        sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL)
+    }
+
+    override fun onPause() {
+        sensorManager.unregisterListener(this)
+        super.onPause()
+    }
     private fun uploadImage(id: String?) {
         if (imageUrl != null) {
             val file = File(imageUrl!!)
@@ -126,7 +188,6 @@ class UserupdateActivity : AppCompatActivity() {
                 try {
                     val userrepo = UserRepository()
                     val response = userrepo.uploadImage(id!!, body)
-                    println("Success of image upload"+response.success)
                     if (response.success == true) {
                         withContext(Main) {
                             Toast.makeText(this@UserupdateActivity, "Uploaded", Toast.LENGTH_SHORT)

@@ -1,11 +1,19 @@
 package com.example.futsalapp.fragments
 
 import android.content.Context
+import android.content.Context.SENSOR_SERVICE
+import android.graphics.Color
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,13 +30,16 @@ import kotlinx.coroutines.Dispatchers.Main
 class FutsalFragment : Fragment(R.layout.fragment_futsal) {
 
     private lateinit var recView: RecyclerView
+    private lateinit var linlay: LinearLayout
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
 
        val view = inflater.inflate(R.layout.fragment_futsal, container, false)
+
        recView = view.findViewById(R.id.recView)
+       linlay = view.findViewById(R.id.linlay)
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val futsalrepo = FutsalRepository()
@@ -54,6 +65,4 @@ class FutsalFragment : Fragment(R.layout.fragment_futsal) {
         return view
 
     }
-
- 
 }

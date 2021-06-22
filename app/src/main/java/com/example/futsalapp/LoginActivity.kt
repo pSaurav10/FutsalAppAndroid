@@ -2,6 +2,11 @@ package com.example.futsalapp
 
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.os.Bundle
 import android.view.View
 import android.widget.*
@@ -17,13 +22,15 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity(), SensorEventListener {
 
     private lateinit var etUsername: EditText
     private lateinit var etPassword: EditText
     private lateinit var btnLogin: Button
     private lateinit var tvSignup: TextView
     private lateinit var cbLogin: CheckBox
+    private lateinit var sensorManager: SensorManager
+    private var sensor: Sensor?= null
     private var isCheck = false
     private  var player: String? = null
     private lateinit var linearlayout: LinearLayout
@@ -36,6 +43,15 @@ class LoginActivity : AppCompatActivity() {
         btnLogin = findViewById(R.id.btnLogin)
         cbLogin = findViewById(R.id.cbLogin)
         linearlayout = findViewById(R.id.linearlayout)
+        sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
+
+        if (!checkSensor())
+            return
+        else {
+            sensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT)
+            sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL)
+        }
+
 
         tvSignup.setOnClickListener {
             val intent = Intent(
@@ -102,5 +118,25 @@ class LoginActivity : AppCompatActivity() {
         editor.putString("password", password)
         editor.putBoolean("isChecked", isCheck);
         editor.apply()
+    }
+    private fun checkSensor(): Boolean {
+        var flag = true
+        if (sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY)==null){
+            flag = false
+        }
+        return flag
+    }
+    override fun onSensorChanged(event: SensorEvent?) {
+        val values = event!!.values[0]
+        if (values>40)
+        {
+            linearlayout.setBackgroundColor(Color.WHITE)
+        }
+        if (values<40){
+            linearlayout.setBackgroundColor(Color.GRAY)
+        }
+    }
+
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
     }
 }
